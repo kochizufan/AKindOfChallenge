@@ -19,7 +19,8 @@ my @buffer;
 for (my $i = 0; $i < @inputs; $i++) {
     push @buffer, [$i,$inputs[$i]];
 }
-my @result = sort { $b->[1] <=> $b->[1] } @buffer;
+warn @buffer;
+my @result = sort { $b->[1] <=> $a->[1] } @buffer;
 
 for my $index (0..2) {
     say $result[$index]->[0] . " -> " . $result[$index]->[1];
