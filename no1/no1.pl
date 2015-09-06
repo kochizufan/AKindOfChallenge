@@ -10,6 +10,7 @@ my $file = $ARGV[0];
 open my $in, "<", $file or die "ファイルが見つかりません";
 my $throw_num = chomp(<$in>);
 my @throws = split(/\s/,chomp(<$in>)); 
+close $in;
 
 die "投げた回数があいません" if ($throw_num != @throws);
 my @scores;
