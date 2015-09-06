@@ -13,7 +13,7 @@ $key = "default key";
 GetOptions(
     "source|s=s" => \$source,
     "destination|d=s" => \$destination,
-    "inverse|" => \$inverse,
+    "inverse|i" => \$inverse,
     "key|k:s" => \$key
 );
 
