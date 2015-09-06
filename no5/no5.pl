@@ -3,7 +3,7 @@
 use strict;
 use warnings;
 use utf8;
-use Encode qw(utf8_decode);
+use Encode qw(encode_utf8);
 
 use feature qw(switch say);
 use XML::RSS::Parser;
@@ -14,10 +14,7 @@ my $parser = XML::RSS::Parser->new;
 my $xml = get($url);
 my $feeds = $parser->parse_string($xml);
 
-# use Data::Dumper;
-# print Dumper($feeds);
-
 foreach my $feed ( $feeds->query('//item') ) { 
     my $title = $feed->query('title');
-    say " * " . utf8_decode($title->text_content);
+    say " * " . encode_utf8($title->text_content);
 }
