@@ -1,0 +1,33 @@
+<html>
+<head><title>チャット</title></head>
+<body>
+<textarea readonly id="display" style="width:500px;height:400px;"></textarea>
+<p><input type="text" id="input" /></p>
+<script src="https://code.jquery.com/jquery-1.11.3.min.js" ></script>
+<script>
+$(function () {
+  $('#input').focus();
+
+  var display = function (text) {
+    $('#display').val( $('#display').val() + text + "\n");
+  };
+  
+  var ws = new WebSocket('ws://localhost:8889/echo');
+  ws.onopen = function () {
+    display('Connection opened');
+  };
+  
+  ws.onmessage = function (message) { 
+    display(message.data);
+  };
+
+  $('#input').keydown(function (event) {
+    if (event.keyCode == 13 && $('#input').val()) {
+        ws.send($('#input').val());
+        $('#input').val('');
+    }
+  });
+});
+</script>
+</body>
+</html>
